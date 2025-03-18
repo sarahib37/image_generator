@@ -58,7 +58,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ],
       },
     };
-  } catch{
+  } catch (error) { 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return { title: "Not Found", description: "This post does not exist." };
   }
 }
