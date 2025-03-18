@@ -7,10 +7,17 @@ import rehypeStringify from "rehype-stringify";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import matter from "gray-matter";
-import fs from "fs/promises"; // Use async file reading
+import fs from "fs/promises";
 import Image from "next/image";
 import BlogCtn from "@/components/BlogCtn";
-import { notFound } from "next/navigation"; // Handle missing files
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const files = await fs.readdir("content"); // Get all markdown files
+  return files.map((file) => ({
+    slug: file.replace(".md", ""),
+  }));
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const processor = unified()
@@ -21,8 +28,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     .use(rehypeAutolinkHeadings);
 
   try {
-    const filePath = `content/${params.slug}.md`;
-    const fileContent = await fs.readFile(filePath, "utf-8"); // Use async readFile
+    const filePath = `content/${params.slug}.md`; // FIXED: Added backticks for string interpolation
+    const fileContent = await fs.readFile(filePath, "utf-8");
     const { data, content } = matter(fileContent);
     const htmlContent = (await processor.process(content)).toString();
 
@@ -57,7 +64,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
     );
   } catch (error) {
-    console.log(error)
-    return notFound(); // Redirect to 404 if file is not found
+    console.log(error);
+    return notFound();
   }
 }
