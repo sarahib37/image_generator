@@ -13,24 +13,29 @@ import BlogCtn from "@/components/BlogCtn";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-// Define the expected structure of the props
-interface PageProps {
+// Define proper type for page props
+type PageProps = {
   params: {
     slug: string;
   };
+};
+
+// Ensure correct type usage for `generateStaticParams`
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  try {
+    const files = await fs.readdir("content");
+    return files
+      .filter((file) => file.endsWith(".md"))
+      .map((file) => ({
+        slug: file.replace(".md", ""),
+      }));
+  } catch (error) {
+    console.error("Error reading content directory:", error);
+    return [];
+  }
 }
 
-// Generate dynamic paths for static site generation
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
-  const files = await fs.readdir("content"); // Get all markdown files
-  return files
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => ({
-      slug: file.replace(".md", ""),
-    }));
-}
-
-// Generate metadata dynamically for SEO
+// Ensure correct metadata typing
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
     const filePath = `content/${params.slug}.md`;
@@ -58,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-// Main component
+// Main page function with corrected type
 export default async function Page({ params }: PageProps) {
   const processor = unified()
     .use(remarkParse)
