@@ -11,15 +11,55 @@ import fs from "fs/promises";
 import Image from "next/image";
 import BlogCtn from "@/components/BlogCtn";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
-export async function generateStaticParams() {
-  const files = await fs.readdir("content"); // Get all markdown files
-  return files.map((file) => ({
-    slug: file.replace(".md", ""),
-  }));
+// Define the expected structure of the props
+interface PageProps {
+  params: {
+    slug: string;
+  };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+// Generate dynamic paths for static site generation
+export async function generateStaticParams(): Promise<PageProps["params"][]> {
+  const files = await fs.readdir("content"); // Get all markdown files
+  return files
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => ({
+      slug: file.replace(".md", ""),
+    }));
+}
+
+// Generate metadata dynamically for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const filePath = `content/${params.slug}.md`;
+    const fileContent = await fs.readFile(filePath, "utf-8");
+    const { data } = matter(fileContent);
+
+    return {
+      title: data.title || "Blog Post",
+      description: data.description || "Read the latest article",
+      openGraph: {
+        title: data.title,
+        description: data.description,
+        images: [
+          {
+            url: data.imageUrl,
+            width: 1200,
+            height: 630,
+            alt: data.title,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return { title: "Not Found", description: "This post does not exist." };
+  }
+}
+
+// Main component
+export default async function Page({ params }: PageProps) {
   const processor = unified()
     .use(remarkParse)
     .use(remarkRehype)
@@ -28,7 +68,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     .use(rehypeAutolinkHeadings);
 
   try {
-    const filePath = `content/${params.slug}.md`; // FIXED: Added backticks for string interpolation
+    const filePath = `content/${params.slug}.md`;
     const fileContent = await fs.readFile(filePath, "utf-8");
     const { data, content } = matter(fileContent);
     const htmlContent = (await processor.process(content)).toString();
@@ -50,9 +90,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </p>
             <Image
               src={data.imageUrl}
-              alt="Herbode"
+              alt={data.title}
               width={1000}
-              height={100}
+              height={500}
               className="mt-[2em] mb-[5em]"
             />
             <div
@@ -64,7 +104,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
     );
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching markdown file:", error);
     return notFound();
   }
 }
