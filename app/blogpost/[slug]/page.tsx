@@ -57,6 +57,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
     );
   } catch (error) {
+    console.log(error)
     return notFound(); // Redirect to 404 if file is not found
   }
 }
