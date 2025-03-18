@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ],
       },
     };
-  } catch (error) {
+  } catch (_) {
     return { title: "Not Found", description: "This post does not exist." };
   }
 }
