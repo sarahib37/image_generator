@@ -1,6 +1,7 @@
 'use client'
 
 import SampleBlogs from "@/config/sampleblogs";
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface BlogType {
@@ -8,9 +9,9 @@ interface BlogType {
   title: string;
   description: string;
   category: string[];
-  imageUrl?: string;
-  author?: string;
-  date?: string;
+  imageUrl: string;
+  author: string;
+  date: string;
 }
 
 const BlogList = () => {
@@ -57,11 +58,7 @@ const BlogList = () => {
         {filteredBlogs.map((blog: BlogType, index: number) => (
           <a key={index} href={`/blogpost/${blog.slug}`} className="w-full">
             <div className="shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:scale-105 bg-neutral-900 text-white flex flex-col h-full">
-              <img
-                src={blog.imageUrl}
-                alt={blog.title}
-                className="w-full h-40 md:h-48 object-cover"
-              />
+              <Image src={blog.imageUrl} alt={blog.title} className="w-full h-40 md:h-48 object-cover" width='1000' height='1000' />
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
                 <p className="text-sm mb-3 flex-grow">{blog.description}</p>

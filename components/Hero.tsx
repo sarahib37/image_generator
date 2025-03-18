@@ -3,18 +3,16 @@
 import { Button, Flex, Span, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 
-type Props = {};
-
-export default function Hero({}: Props) {
+export default function Hero() {
   return (
     <div
       className="relative w-full h-[auto] md:h-[100vh] pb-[2em] md:pb-[.5em] text-center flex flex-col items-center font-center justify-center text-primary bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url('/Hero.webp')" }}
     >
       <Flex flexDir='column' width={useBreakpointValue({base: '90%', md: '50%'})} gap='1em' shadow='sm' background="linear-gradient(135deg, #618361, white, #618361)" padding='1.5em' mt={useBreakpointValue({base: '8em', md:'6em'})}>
-        <h1 className="text-5xl font-bold drop-shadow-lg z-30">For <Span fontStyle='italic'>women</Span>, by <Span fontStyle='italic'>women</Span>, and with <Span fontStyle='italic'>women</Span></h1>
+        <h1 className="text-5xl font-bold drop-shadow-lg z-30">For <span className="italic">women</span>, by <span className="italic">women</span>, and with <span className="italic">women</span></h1>
         <div>
-          <p>"The connections between and among women are the most feared, the most problematic, and the most potentially transforming force on the planet."</p>
+        <p>{`"The connections between and among women are the most feared, the most problematic, and the most potentially transforming force on the planet."`}</p>
           <Text fontWeight='bold' fontStyle='italic'>Adrienne Rich</Text>
         </div>
 

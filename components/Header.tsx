@@ -12,9 +12,7 @@ import {
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
-type Props = {}
-
-export default function Header({}: Props) {
+export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
   return (
     <header className='fixed top-0 w-full p-6 md:p-2 lg:px-12 text-white flex justify-between items-center z-50 bg-transparent backdrop-blur-sm'>

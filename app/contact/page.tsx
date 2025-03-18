@@ -5,19 +5,16 @@ import { Button, Field, Flex, Input, Stack, Text, Textarea } from '@chakra-ui/re
 import React from 'react'
 import { useForm } from "react-hook-form"
 
-type Props = {}
-
 interface FormValues {
   name: string
   email: string
   message: string
 } 
 
-export default function Page({}: Props) {
+export default function Page() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<FormValues>()
 
   const onSubmit = handleSubmit((data) => console.log(data))

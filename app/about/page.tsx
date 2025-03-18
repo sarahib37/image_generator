@@ -4,9 +4,7 @@ import { Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 
-type Props = {}
-
-export default function page({}: Props) {
+export default function Page() {
   return (
     <Flex flexDir='column' width={useBreakpointValue({base: '90%', md:'50%'})} alignItems='center' justifyContent='center' mx='auto' py='8em' gap='3em'>
         <Image src='/About.webp' alt='About Herbode' width={1000} height={1000}/>
