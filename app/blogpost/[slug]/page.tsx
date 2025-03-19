@@ -13,29 +13,20 @@ import BlogCtn from "@/components/BlogCtn";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-// Define proper type for page props
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-// Ensure correct type usage for `generateStaticParams`
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  try {
-    const files = await fs.readdir("content");
-    return files
-      .filter((file) => file.endsWith(".md"))
-      .map((file) => ({
-        slug: file.replace(".md", ""),
-      }));
-  } catch (error) {
-    console.error("Error reading content directory:", error);
-    return [];
-  }
+// ✅ Correct PageProps Type
+interface PageProps {
+  params: { slug: string };
 }
 
-// Ensure correct metadata typing
+// ✅ Ensure Static Params Are Correctly Generated
+export async function generateStaticParams(): Promise<PageProps["params"][]> {
+  const files = await fs.readdir("content");
+  return files
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => ({ slug: file.replace(".md", "") }));
+}
+
+// ✅ Generate Metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
     const filePath = `content/${params.slug}.md`;
@@ -48,23 +39,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       openGraph: {
         title: data.title,
         description: data.description,
-        images: [
-          {
-            url: data.imageUrl,
-            width: 1200,
-            height: 630,
-            alt: data.title,
-          },
-        ],
+        images: [{ url: data.imageUrl, width: 1200, height: 630, alt: data.title }],
       },
     };
-  } catch (error) {
-    console.error("Error generating metadata:", error);
+  } catch {
     return { title: "Not Found", description: "This post does not exist." };
   }
 }
 
-// Main page function with corrected type
+// ✅ Fix Page Component
 export default async function Page({ params }: PageProps) {
   const processor = unified()
     .use(remarkParse)
@@ -101,10 +84,7 @@ export default async function Page({ params }: PageProps) {
               height={500}
               className="mt-[2em] mb-[5em]"
             />
-            <div
-              className="markdown-content"
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
-            ></div>
+            <div className="markdown-content" dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
           </Box>
         </BlogCtn>
       </div>
