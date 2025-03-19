@@ -48,19 +48,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 // ✅ Fix Page Component
-export default async function Page({ params }: PageProps) {
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeStringify)
-    .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings);
-
+export default async function Page({ params }: { params: { slug: string } }) {
   try {
     const filePath = `content/${params.slug}.md`;
     const fileContent = await fs.readFile(filePath, "utf-8");
     const { data, content } = matter(fileContent);
-    const htmlContent = (await processor.process(content)).toString();
 
     return (
       <div>
@@ -84,7 +76,7 @@ export default async function Page({ params }: PageProps) {
               height={500}
               className="mt-[2em] mb-[5em]"
             />
-            <div className="markdown-content" dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
+            <div className="markdown-content" dangerouslySetInnerHTML={{ __html: content }}></div>
           </Box>
         </BlogCtn>
       </div>
