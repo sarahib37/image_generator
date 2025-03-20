@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Lora } from "next/font/google";
 import "./globals.css";
 import Header from '../components/Header'
-import { Provider } from "@/components/ui/provider";
+import { Provider } from "@/components/ui/provider.jsx";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
