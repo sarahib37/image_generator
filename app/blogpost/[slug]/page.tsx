@@ -14,7 +14,7 @@ import Image from "next/image";
 import BlogCtn from "@/components/BlogCtn";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }) {
   try {
     const filePath = path.join(process.cwd(), "content", `${params.slug}.md`);
     const fileContent = await fs.readFile(filePath, "utf-8");
