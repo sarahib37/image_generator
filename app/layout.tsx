@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lora } from "next/font/google";
 import "./globals.css";
-import Header from '../components/Header'
 import { Provider } from "@/components/ui/provider.jsx";
 
 const playfair = Playfair_Display({
@@ -17,8 +16,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Herbode - A Safe Space For Women, By Women.",
-  description: "Herbode is a safe and empowering space for women, built by women. Join a supportive community dedicated to growth, advocacy, and meaningful connections.",
+  title: "Dynamic Image Card | Refreshable Image Gallery with Swiper and Next.js",
+  description: "Explore a beautiful dynamic card built with Next.js, Chakra UI, and Swiper.js. Instantly refresh and browse new high-quality images from Picsum with a seamless user experience.",
 };
 
 export default function RootLayout({
@@ -33,7 +32,6 @@ export default function RootLayout({
       </head>
       <body className={`${playfair.variable} ${lora.variable} antialiased`}>
        <Provider>
-          <Header/>
           <div>{children}</div>
        </Provider> 
       </body>
