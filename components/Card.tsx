@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 import { ImageData } from './type'
 import ImageSlider from './ImageSlider'
 import axios from 'axios'

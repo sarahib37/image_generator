@@ -4,9 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Card from '@/components/Card'
 
-type Props = {}
-
-export default function App({}: Props) {
+export default function App() {
   const [images, setImages] = useState([])
   const [profileImage, setProfileImage] = useState('')
 
