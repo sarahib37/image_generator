@@ -32,7 +32,7 @@ export default function Card({profileImage, title, description, images}: Props) 
   return (
     <Flex flexDirection='column' width='max' backgroundColor='white' shadow='xl' rounded='lg' overflow='hidden' mx='auto'>
         <div className='flex items-center p-4'>
-          {profileImage && <Image src={profileImage} alt='profile image' width={48} height={48} className='rounded-full shadow-lg mr-4' />}
+          {profileImage && <Image src={profileImage} alt='profile image' width={48} height={48} unoptimized className='rounded-full shadow-lg mr-4' />}
           <div>
             <h2 className='text-lg font-semibold'>{title}</h2>
             <p className='text-sm text-gray-500'>{description}</p>
