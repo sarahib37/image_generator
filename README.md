@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖼️ Image Generator
+A simple and visually engaging image generator site that uses the Picsum Photos API and Random User API to display placeholder images and random user profiles.
 
-## Getting Started
+> ⚠️ Note: Images may take a few seconds to load depending on your internet connection.
 
-First, run the development server:
+## 🔗 Live Site
+[Image Generator](https://image-generator-vert-ten.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ⚙️ Tools & Technologies
+- Next.js 14 – App Router structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- TypeScript – Type safety and developer productivity
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Tailwind CSS – Utility-first styling framework
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Chakra UI – Accessible UI components
 
-## Learn More
+- Axios – For HTTP requests
 
-To learn more about Next.js, take a look at the following resources:
+- Swiper.js – Touch-enabled slider/carousel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Picsum Photos API – For generating random placeholder images
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Random User API – For generating user avatars
 
-## Deploy on Vercel
+## ✨ Features
+- 📸 Dynamically generated images using external APIs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 👤 Random user profile avatars and names
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 🖱️ Smooth image slider/carousel using Swiper.js
+
+- 🎨 Modern and responsive UI
+
+- ⚡ Fast-loading and optimized with Next.js 14
+
+---
+🚧 Built with love by [Sarah Igwe](https://github.com/sarahib37)
